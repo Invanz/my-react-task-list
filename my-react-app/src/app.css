@@ -1,4 +1,40 @@
-div{
+body{
+    background-color: rgb(110, 199, 199);
+}
+#webpage{
+    display: flex;
+    flex-direction: column;
+    background-color: azure;
+}
+h1{
+    color: #16697A;
+    margin: 2% 10% 2% 32%;
+}
+#taskBox{
+    display: flex;
+    padding: 1%;
+    border-color: #335961;
+    background-color: #16697A;
+    margin: 2% 10% 2% 5%;
+    border-radius: 5px;
+    justify-content: space-between;
+}
+.actionButton{
+    background: none;
+    border: none;
+}
+#nuevaTareaInput{
+    height: 20px;
+    width: 90%;
+}
+#nuevaTarea{
+    display: flex;
+    flex-direction: row;
+    margin: 2% 10% 2% 7%;
+    justify-content: space-evenly;
+}
+#tareasPendientes{
     display: flex;
     justify-content: space-around;
+    margin-bottom: 2%;
 }

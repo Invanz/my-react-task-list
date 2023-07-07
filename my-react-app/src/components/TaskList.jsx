@@ -1,15 +1,17 @@
 import Task from "./Task"
 
-function TaskList(){
+
+
+function TaskList(props){
 
     return (
         <div>
-            <div>
-                <h3>Nueva tarea:</h3>
-                <input type="text" />
+            <div id="nuevaTarea">
+                <input type="text" placeholder="Nueva tarea" id="nuevaTareaInput"/>
                 <button>+</button>
             </div>
             <div>
+                
                 <Task currentTask="Lavar los platos" />
                 <Task currentTask="Sacar al perro" />
                 <Task currentTask="Tratar de dominar al mundo" />
@@ -17,7 +19,7 @@ function TaskList(){
                 <Task currentTask="Desatrasarme" />
                 <Task currentTask="Ir a clase" />
             </div>
-            <div>
+            <div id="tareasPendientes">
                 <label htmlFor="">Tiene tareas pendientes </label>
                 <button id="cleanAllBttn">Limpiar todo</button>
             </div>
