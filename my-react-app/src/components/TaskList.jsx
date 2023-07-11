@@ -1,28 +1,37 @@
-import Task from "./Task"
+import { Task } from "./Task"
 
-function TaskList(){
+export function TaskList(props){
+    const { list, onHandleChange, onHandleClick, onHandleDelete } = props;
+
+    const handleChange = (e) =>{
+        onHandleChange(e.target.value);
+    }
+    const handleClick = () =>{
+        onHandleClick();
+    }
+
+    const handleDelete = () => {
+        onHandleDelete()
+    }
 
     return (
         <div>
-            <div>
+            <div className="newTask">
                 <h3>Nueva tarea:</h3>
-                <input type="text" />
-                <button>+</button>
+                <input type="text" onChange={handleChange}/>
+                <button onClick={handleClick}>+</button>
             </div>
-            <div>
-                <Task currentTask="Lavar los platos" />
-                <Task currentTask="Sacar al perro" />
-                <Task currentTask="Tratar de dominar al mundo" />
-                <Task currentTask="Aprender React" />
-                <Task currentTask="Desatrasarme" />
-                <Task currentTask="Ir a clase" />
+            <div className="taskList">
+                {list.map((task) => (
+                    <div>
+                        <Task currentTask={task.title} currentDescription={task.description} />
+                    </div>
+                ))}
             </div>
-            <div>
-                <label htmlFor="">Tiene tareas pendientes </label>
-                <button id="cleanAllBttn">Limpiar todo</button>
+            <div className="pendingClean">
+                <label htmlFor="">Tiene {list.length} tareas pendientes </label>
+                <button id="cleanAllBttn" onClick={handleDelete}>Limpiar todo</button>
             </div>
         </div>
     );
-}
-
-export default TaskList
+};

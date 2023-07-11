@@ -1,13 +1,15 @@
-function TodoItem (taskText){
-    const { currentTask } = taskText;
+export function Task (props){
+    const { currentTask, currentDescription } = props;
 
     return (
-    <div>
-        <input type="checkbox" />
-        <label htmlFor="">{ currentTask } </label>
-        <button>Editar</button>
-        <button>Eliminar</button>
+    <div className="task">
+        <div>
+            <input type="radio" />
+            <label htmlFor="">{ currentTask } </label>
+            <button>✏️</button>
+            <button>🗑️</button>
+        </div>
+        <p>{ currentDescription }</p>
     </div>
     );
-}
-export default TodoItem;
+};
