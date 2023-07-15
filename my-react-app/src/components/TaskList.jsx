@@ -1,28 +1,21 @@
-import Task from "./Task"
+import { Task } from "./Task"
 
-function TaskList(){
+export function TaskList(props) {
+    const { list, onHandleDelete, onHandleEdit, onHandleDeleteTask } = props;
 
     return (
         <div>
-            <div>
-                <h3>Nueva tarea:</h3>
-                <input type="text" />
-                <button>+</button>
+            <div className="taskList">
+                {list.map((task) => (
+                    <div key={task.id}>
+                        <Task currentTask={task.title} currentDescription={task.description} currentId={task.id} onHandleEdit={onHandleEdit} onHandleDeleteTask={onHandleDeleteTask} />
+                    </div>
+                ))}
             </div>
-            <div>
-                <Task currentTask="Lavar los platos" />
-                <Task currentTask="Sacar al perro" />
-                <Task currentTask="Tratar de dominar al mundo" />
-                <Task currentTask="Aprender React" />
-                <Task currentTask="Desatrasarme" />
-                <Task currentTask="Ir a clase" />
-            </div>
-            <div>
-                <label htmlFor="">Tiene tareas pendientes </label>
-                <button id="cleanAllBttn">Limpiar todo</button>
+            <div className="pendingClean">
+                <label htmlFor="">Tiene {list.length} tareas pendientes </label>
+                <button id="cleanAllBttn" onClick={() => onHandleDelete()}>Limpiar todo</button>
             </div>
         </div>
     );
-}
-
-export default TaskList
+};
