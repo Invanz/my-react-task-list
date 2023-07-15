@@ -1,40 +1,104 @@
-body{
-    background-color: rgb(110, 199, 199);
+body {
+    background-color: antiquewhite;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-#webpage{
+.body {
+    background-color: goldenrod;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
-    background-color: azure;
+    align-items: center;
 }
-h1{
-    color: #16697A;
-    margin: 2% 10% 2% 32%;
+
+.header {
+    background-color: bisque;
+    border-radius: 15px;
+    padding: 5px 100px 10px 100px;
+    margin: 10px;
 }
-#taskBox{
-    display: flex;
-    padding: 1%;
-    border-color: #335961;
-    background-color: #16697A;
-    margin: 2% 10% 2% 5%;
-    border-radius: 5px;
-    justify-content: space-between;
+
+.newTask {
+    background-color: antiquewhite;
+    border-radius: 10px;
+    padding: 1px 70px 10px 70px;
+    margin-bottom: 20px;
 }
-.actionButton{
-    background: none;
+
+.newTask input{
+    background-color: grey;
     border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    transition-duration: 0.5s;
 }
-#nuevaTareaInput{
-    height: 20px;
-    width: 90%;
+
+.newTask input:hover {
+    background-color: rgb(157, 141, 116);
 }
-#nuevaTarea{
+
+.newTask button {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+    background-color: black;
+    color: yellow;
+    transition-duration: 0.5s;
+}
+
+.newTask button:hover {
+    color: rgb(130, 130, 82);
+}
+
+.taskList {
+    background-color: blanchedalmond;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.pendingClean {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.pendingClean button {
+    border: none;
+    border-radius: 5px;
+    padding: 4px;
+    background-color: bisque;
+    color: rgb(149, 149, 108);
+}
+
+.pendingClean button:active {
+    background-color: aliceblue;
+}
+
+.task {
+
+    background-color: rgb(209, 209, 176);
+    margin: 2px;
+    border-radius: 7px;
+    padding: 1px;
+}
+
+.task div {
     display: flex;
-    flex-direction: row;
-    margin: 2% 10% 2% 7%;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    margin-top: 2px;
+    margin-right: 2px;
 }
-#tareasPendientes{
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 2%;
+
+.task div label {
+    width: 220px;
+}
+
+.task div button {
+    border: none;
+    border-radius: 5px;
+    background-color: bisque;
+    color: rgb(149, 149, 108);
+}
+
+.task p {
+    margin-left: 4px;
+    color: rgb(106, 92, 4);
 }
