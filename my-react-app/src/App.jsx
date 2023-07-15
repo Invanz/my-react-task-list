@@ -1,46 +1,71 @@
 import { Header } from './components/Header';
 import { TaskList } from './components/TaskList'
 import "./app.css";
+import { useState, useEffect } from 'react';
 
 function App() {
 
-  const taskArray = [{
-    title: "Task 1",
-    description: "This is a task"
-  },
-  {
-    title: "Task 2",
-    description: "This is a task"
-  },
-  {
-    title: "Task 3",
-    description: "This is a task"
-  }];
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const [taskArray, setTaskArray] = useState(() => {
+    const taskArrayData = JSON.parse(localStorage.getItem("taskArrayData"));
+    if (taskArrayData.length > 0) {
+      return (taskArrayData);
+    } else {
+      return [{
+        id: 0,
+        title: "Tarea de prueba",
+        description: "Acá puedes escribir la descripción de tu tarea."
+      }];
+    };
+  });
 
-  let newTitle= "";
+  useEffect(() => {
+    localStorage.setItem("taskArrayData", JSON.stringify(taskArray));
+    console.log(JSON.parse(localStorage.getItem("taskArrayData")));
+  }, [taskArray]);
 
-  const onHandleChange = (title) => {
-    newTitle=title;
+  const onHandleChangeTitle = (title) => {
+    setTaskTitle(title);
   };
+
+  const onHandleChangeDescription = (description) => {
+    setTaskDescription(description);
+  }
 
   const onHandleClick = () =>{
-    taskArray.unshift({
-      title: newTitle,
-      description: "This is a new task"
-    })
+    let lastItem=0
+    if (taskArray.length > 0){
+      lastItem= (taskArray[taskArray.length-1].id) + 1;
+    }
+    setTaskArray([...taskArray, {id: lastItem, title: taskTitle, description: taskDescription}]);
+    setTaskTitle("");
+    setTaskDescription("");
   };
 
-  const onHandleDelete = () =>{
-    taskArray.forEach(() =>{
-      taskArray.pop();
-    })
-    taskArray.pop();
-  }
+  const onHandleDelete = () => {
+    setTaskArray([])
+  };
+
+  const onHandleEdit = (taskId, taskNewTitle, taskNewDescription) => {
+    setTaskArray(taskArray.map((task) => {
+      if (task.id == taskId) {
+        task.title = taskNewTitle;
+        task.description = taskNewDescription;
+      };
+      return task;
+    }));
+  };
+
+  const onHandleDeleteTask = (taskId) => {
+    const newTaskArray = taskArray.filter(task => task.id !== taskId);
+    setTaskArray(newTaskArray);
+  };
 
   return (
     <div className='body'>
-        <Header name="TO-DO App" />
-        <TaskList list={taskArray} onHandleChange={onHandleChange} onHandleClick={onHandleClick} onHandleDelete={onHandleDelete}/>
+        <Header name="TO-DO App" onHandleClick={onHandleClick} onHandleChangeTitle={onHandleChangeTitle} onHandleChangeDescription={onHandleChangeDescription} taskTitle={taskTitle} taskDescription={taskDescription}/>
+        <TaskList list={taskArray} onHandleDelete={onHandleDelete} onHandleEdit={onHandleEdit} onHandleDeleteTask={onHandleDeleteTask}/>
     </div>
     );
 }
