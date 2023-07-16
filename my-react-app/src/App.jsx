@@ -8,7 +8,7 @@ function App() {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskArray, setTaskArray] = useState(() => {
-    const taskArrayData = JSON.parse(localStorage.getItem("taskArrayData"));
+    const taskArrayData = JSON.parse(localStorage.getItem("taskArrayData")) || [];
     if (taskArrayData.length > 0) {
       return (taskArrayData);
     } else {
