@@ -1,7 +1,6 @@
-
 export const taskContext= () => {
     if (localStorage.getItem("taskListArray")) {
-      return setTaskList(JSON.parse(localStorage.getItem("taskListArray")));
+      return JSON.parse(localStorage.getItem("taskListArray"));
     };
     return [{
       id: 0,

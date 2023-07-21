@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { Task } from "./Task"
 import { taskListContext } from "../App";
+import { useCRUD } from "../hooks/useCRUD";
 
 export function TaskList() {
     const taskListArray = useContext(taskListContext);
+    const { deleteAll } = useCRUD();
 
     return (
         <div>
@@ -16,7 +18,7 @@ export function TaskList() {
             </div>
             <div className="pendingClean">
                 <label htmlFor="">Tiene {taskListArray.length} tarea(s) pendiente(s) </label>
-                <button id="cleanAllBttn" >Limpiar todo</button>
+                <button id="cleanAllBttn" onClick={() => deleteAll()}>Limpiar todo</button>
             </div>
         </div>
     );
