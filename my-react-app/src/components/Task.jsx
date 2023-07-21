@@ -1,48 +1,33 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-export function Task (props){
-    const { currentTask, currentDescription, currentId, onHandleEdit, onHandleDeleteTask } = props;
-    const [editing, setEditing] = useState(false);
-    const [displayedTask, setDisplayedTask] = useState(currentTask);
-    const [displayedDescription, setDisplayedDescription] = useState(currentDescription);
+export function Task(props) {
 
-    let viewMode= {};
-    let editMode= {};
+    const { task } = props;
+    const [edit, setEdit] = useState(false)
 
-    if (editing){
-        viewMode.display = "none";
-    } else {
-        editMode.display = "none";
+    if (edit) {
+        return (
+            <div className="task">
+                <input type="text" />
+                <button onClick={() => {
+                    setEdit(false);
+                }}>✔️</button>
+                <button onClick={() => {
+                    setEdit(false);
+                }}>✖️</button><br />
+                <input type="text" onChange={(e) => e.target.value} />
+            </div>
+        )
     }
-
     return (
-    <div className="task">
-        <div>
+        <div className="task">
             <input type="radio" />
-            <label htmlFor="" style={viewMode}>{ currentTask } </label>
-            <input type="text" value={displayedTask} style={editMode} onChange={(e) => {
-                setDisplayedTask(e.target.value);
-            }}/>
-            <button onClick={() =>{
-                setEditing(true);
-            }} style={viewMode}>✏️</button>
+            <label htmlFor="">{task.task} </label>
             <button onClick={() => {
-                onHandleEdit(currentId, displayedTask, displayedDescription);
-                setEditing(false);
-            }} style={editMode}>✔️</button>
-            <button onClick={() => {
-                setEditing(false);
-                setDisplayedTask(currentTask);
-                setDisplayedDescription(currentDescription);
-            }} style={editMode}>✖️</button>
-            <button onClick={() =>{
-                onHandleDeleteTask(currentId);
-            }} style={viewMode}>🗑️</button>
+                setEdit(true);
+            }}>✏️</button>
+            <button>🗑️</button>
+            <p>{task.description}</p>
         </div>
-        <p style={viewMode}>{ currentDescription }</p>
-        <input type="text" value={displayedDescription} style={editMode} onChange={(e) => {
-            setDisplayedDescription(e.target.value)
-        }}/>
-    </div>
     );
 };
