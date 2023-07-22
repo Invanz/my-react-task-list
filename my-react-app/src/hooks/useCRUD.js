@@ -1,9 +1,10 @@
-import { taskContext } from "../taskContext";
-import { useState } from "react";
+import { taskContext } from "../contexts/taskContext";
+import { useState, useContext } from "react";
 
 export const useCRUD = () => {
+    const {taskList} = useContext(taskContext)
 
-    const [taskList, setTaskList] = useState([]);
+    // const [taskList, setTaskList] = useState(taskContext);
 
     const createTask = (newTask) =>  {
         console.log(taskList, newTask)
@@ -26,10 +27,10 @@ export const useCRUD = () => {
         setTaskList([]);
     }
     return {
-        taskList: taskList,
-        createTask: createTask,
-        deleteTask: deleteTask,
-        updateTask: updateTask,
-        deleteAll: deleteAll,
+        taskList,
+        createTask,
+        deleteTask,
+        updateTask,
+        deleteAll,
     }
 }

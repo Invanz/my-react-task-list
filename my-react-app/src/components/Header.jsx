@@ -18,7 +18,6 @@ export function Header() {
                 }
         }
     }
-    const { createTask } = useCRUD();
 
     const [state, dispatch] = useReducer(reducer, { taskTitle: "", taskDescription: "" })
 
