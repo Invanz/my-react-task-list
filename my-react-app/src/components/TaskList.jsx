@@ -1,24 +1,22 @@
 import { useContext } from "react";
 import { Task } from "./Task"
 import { taskListContext } from "../App";
-import { useCRUD } from "../hooks/useCRUD";
 
 export function TaskList() {
-    const taskListArray = useContext(taskListContext);
-    const { deleteAll } = useCRUD();
+    const { taskList, setTaskList, deleteAll } = useContext(taskListContext);
 
     return (
         <div>
             <div className="taskList">
-                {taskListArray.map((task) => (
+                {taskList.map((task) => (
                     <div key={task.id}>
                         <Task task={task}  />
                     </div>
                 ))}
             </div>
             <div className="pendingClean">
-                <label htmlFor="">Tiene {taskListArray.length} tarea(s) pendiente(s) </label>
-                <button id="cleanAllBttn" onClick={() => deleteAll()}>Limpiar todo</button>
+                <label htmlFor="">Tiene {taskList.length} tarea(s) pendiente(s) </label>
+                <button id="cleanAllBttn" onClick={() => deleteAll(setTaskList)}>Limpiar todo</button>
             </div>
         </div>
     );

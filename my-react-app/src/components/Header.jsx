@@ -1,8 +1,10 @@
-import { useReducer } from "react";
+import { useContext, useReducer } from "react";
 import { useCRUD } from "../hooks/useCRUD";
+import { taskListContext } from "../App";
 import { v4 as uuid } from 'uuid';
 
 export function Header() {
+    const { taskList, setTaskList, createTask} = useContext(taskListContext)
 
     const reducer = (state, action) => {
         switch (action.type) {
@@ -37,7 +39,9 @@ export function Header() {
                         task: state.taskTitle,
                         description: state.taskDescription,
                         done: false,
-                    })
+                    }, taskList, setTaskList);
+                    dispatch({type: "title", payload: ""});
+                    dispatch({type: "description", payload: ""});
                 }}>
                     <input placeholder="Título" type="text" onInput={(e) => dispatch({ type: "title", payload: e.target.value })} value={state.taskTitle} />
                     <br />
