@@ -1,48 +1,40 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { taskListContext } from "../App";
 
-export function Task (props){
-    const { currentTask, currentDescription, currentId, onHandleEdit, onHandleDeleteTask } = props;
-    const [editing, setEditing] = useState(false);
-    const [displayedTask, setDisplayedTask] = useState(currentTask);
-    const [displayedDescription, setDisplayedDescription] = useState(currentDescription);
+export function Task(props) {
 
-    let viewMode= {};
-    let editMode= {};
+    const { task } = props;
+    const [edit, setEdit] = useState(false);
+    const [ newTitle, setNewTitle ] = useState(task.task);
+    const [ newDescription, setNewDescription] = useState(task.description)
+    const { taskList, setTaskList, deleteTask, updateTask } = useContext(taskListContext);
 
-    if (editing){
-        viewMode.display = "none";
-    } else {
-        editMode.display = "none";
+    if (edit) {
+        return (
+            <div className="task">
+                <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}/>
+                <button onClick={() => {
+                    updateTask(task, newTitle, newDescription, taskList, setTaskList)
+                    setEdit(false);
+                }}>✔️</button>
+                <button onClick={() => {
+                    setEdit(false);
+                    setNewTitle(task.task);
+                    setNewDescription(task.description)
+                }}>✖️</button><br />
+                <input type="text" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} />
+            </div>
+        )
     }
-
     return (
-    <div className="task">
-        <div>
+        <div className="task">
             <input type="radio" />
-            <label htmlFor="" style={viewMode}>{ currentTask } </label>
-            <input type="text" value={displayedTask} style={editMode} onChange={(e) => {
-                setDisplayedTask(e.target.value);
-            }}/>
-            <button onClick={() =>{
-                setEditing(true);
-            }} style={viewMode}>✏️</button>
+            <label htmlFor="">{task.task} </label>
             <button onClick={() => {
-                onHandleEdit(currentId, displayedTask, displayedDescription);
-                setEditing(false);
-            }} style={editMode}>✔️</button>
-            <button onClick={() => {
-                setEditing(false);
-                setDisplayedTask(currentTask);
-                setDisplayedDescription(currentDescription);
-            }} style={editMode}>✖️</button>
-            <button onClick={() =>{
-                onHandleDeleteTask(currentId);
-            }} style={viewMode}>🗑️</button>
+                setEdit(true);
+            }}>✏️</button>
+            <button onClick={() => deleteTask(task, taskList, setTaskList)}>🗑️</button>
+            <p>{task.description}</p>
         </div>
-        <p style={viewMode}>{ currentDescription }</p>
-        <input type="text" value={displayedDescription} style={editMode} onChange={(e) => {
-            setDisplayedDescription(e.target.value)
-        }}/>
-    </div>
     );
 };

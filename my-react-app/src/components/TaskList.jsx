@@ -1,20 +1,22 @@
+import { useContext } from "react";
 import { Task } from "./Task"
+import { taskListContext } from "../App";
 
-export function TaskList(props) {
-    const { list, onHandleDelete, onHandleEdit, onHandleDeleteTask } = props;
+export function TaskList() {
+    const { taskList, setTaskList, deleteAll } = useContext(taskListContext);
 
     return (
         <div>
             <div className="taskList">
-                {list.map((task) => (
+                {taskList.map((task) => (
                     <div key={task.id}>
-                        <Task currentTask={task.title} currentDescription={task.description} currentId={task.id} onHandleEdit={onHandleEdit} onHandleDeleteTask={onHandleDeleteTask} />
+                        <Task task={task}  />
                     </div>
                 ))}
             </div>
             <div className="pendingClean">
-                <label htmlFor="">Tiene {list.length} tareas pendientes </label>
-                <button id="cleanAllBttn" onClick={() => onHandleDelete()}>Limpiar todo</button>
+                <label htmlFor="">Tiene {taskList.length} tarea(s) pendiente(s) </label>
+                <button id="cleanAllBttn" onClick={() => deleteAll(setTaskList)}>Limpiar todo</button>
             </div>
         </div>
     );
