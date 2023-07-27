@@ -27,7 +27,7 @@ export function Header() {
 
     const handleTaskTitle = (e) => {
         const titleValue = e.target.value.length;
-        setTittleError(titleValue < 4 ? "El título debe ser mayor a 3 caracteres." : ""); 
+        setTittleError(titleValue == 0 ? undefined : titleValue < 4 ? "El título debe ser mayor a 3 caracteres." : ""); 
     }
 
     const isValidTask= titleError == "" ? true : false;
