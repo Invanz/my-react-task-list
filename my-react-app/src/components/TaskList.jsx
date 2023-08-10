@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Task } from "./Task"
-import { taskListContext } from "../App";
+import { taskListContext } from "../pages/TareasPage";
 
 export function TaskList() {
     const { taskList, setTaskList, deleteAll } = useContext(taskListContext);

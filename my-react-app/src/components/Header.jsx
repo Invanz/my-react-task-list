@@ -1,5 +1,5 @@
 import { useContext, useReducer, useState } from "react";
-import { taskListContext } from "../App";
+import { taskListContext } from "../pages/TareasPage";
 import { v4 as uuid } from 'uuid';
 
 export function Header() {
