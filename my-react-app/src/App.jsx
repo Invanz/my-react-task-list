@@ -1,28 +1,27 @@
-import { createContext, useEffect, useState } from 'react';
-import { Header } from './components/Header';
-import { TaskList } from './components/TaskList';
-import { useCRUD } from './hooks/useCRUD';
-import "./app.css";
-import { taskContext } from './contexts/taskContext';
 
-export const taskListContext = createContext();
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HomePage } from './pages/HomePage';
+import { TareasPage } from './pages/TareasPage';
+import { SobreNosotrosPage } from './pages/SobreNosotrosPage';
+import { Menu } from './components/Menu';
+
 
 function App() {
-  const [taskList, setTaskList] = useState(taskContext()) 
-  const { createTask, updateTask, deleteTask, deleteAll } = useCRUD();
 
-  useEffect(() => {
-    localStorage.setItem("taskListArray", JSON.stringify(taskList))
-  }, [taskList])
   
-  return (
-    <div className='body'>
-      <taskListContext.Provider value={{taskList, setTaskList, createTask, updateTask, deleteTask, deleteAll}}>
-        <Header />
-        <TaskList />
-      </taskListContext.Provider>
-    </div>
-  );
+  return(
+    <>
+    <BrowserRouter>
+    <Menu />
+    <Routes>
+      <Route path="/" element={<HomePage />}>Home Page</Route>
+      <Route path="/TaskPage" element={<TareasPage />}>Home Page</Route>
+      <Route path="/AboutUs" element={<SobreNosotrosPage />}>Home Page</Route>
+    </Routes>
+    
+    </BrowserRouter>
+    </>
+  )
 };
 
 export default App;

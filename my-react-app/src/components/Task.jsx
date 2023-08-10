@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { taskListContext } from "../App";
+import { taskListContext } from "../pages/TareasPage";
 
 export function Task(props) {
 
