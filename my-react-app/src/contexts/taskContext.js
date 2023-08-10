@@ -1,6 +1,6 @@
 export const taskContext = () => {
   const dataArray = JSON.parse(localStorage.getItem("taskListArray"));
-  if (dataArray.length>0) {
+  if (dataArray?.length > 0) {
     return dataArray;
   }
   return [
