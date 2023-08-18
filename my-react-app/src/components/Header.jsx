@@ -33,11 +33,6 @@ export function Header() {
 
     return (
         <>
-            <nav>
-                <div className="header">
-                    <h1>TODO APP</h1>
-                </div>
-            </nav>
             <div className="newTask">
                 <h3>Nueva tarea:</h3>
                 <form onSubmit={(e) => {
