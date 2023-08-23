@@ -1,8 +1,14 @@
+import { 
+    Heading,
+    Text,
+    Box,
+ } from "@chakra-ui/react"
+
 export function SobreNosotrosPage() {
     return (
-        <>
-        <h1>Sobre nosotros</h1>
-        <p>Esta aplicación intenta emular una lista de tareas utilizando React y Vite para su construcción. Actualmente se trata de una aplicación con tres vistas a las que es posible acceder a través de el menú ubicado en la parte superior. Si se accede a la vista "Tareas", es posible crear y modificar tareas con la intención de llevar un mejor control de nuestras actividades diarias. </p>
-        </>
+        <Box margin="20" display="flex" flexDirection="column" justifyContent="center" alignItems="center" alignContent="center">
+        <Heading color="gray.400">About us</Heading>
+        <Text margin="20" color="gray.500">This application aims to emulate a to-do list using React and Vite for its construction. Currently, it consists of an application with three pages that can be accessed through the menu located at the top. If you access the "Tasks" page, it's possible to create and modify tasks with the intention of better managing our daily activities.</Text>
+        </Box>
     )
-}
+};
